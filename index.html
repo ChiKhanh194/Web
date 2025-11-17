@@ -1,144 +1,231 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Chúc mừng 20/10</title>
-  <style>
-    :root{--bg:#fff7fb;--card:#ffffff;--accent:#ff67a1;--muted:#6b6b6b}
-    *{box-sizing:border-box}
-    body{margin:0;font-family:sans-serif; background:linear-gradient(180deg,var(--bg),#fff);color:#222}
-    header{padding:28px 20px;text-align:center}
-    .container{max-width:900px;margin:0 auto;padding:16px}
-    .card{background:var(--card);border-radius:16px;box-shadow:0 6px 18px rgba(0,0,0,0.08);padding:20px}
-    h1{margin:6px 0 8px;font-size:28px;color:var(--accent)}
-    p.lead{margin:0 0 12px;color:var(--muted)}
-    .two-col{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
-    .left{flex:1;min-width:240px}
-    .right{width:320px;min-width:240px}
-    input[type=text]{width:100%;padding:12px;border-radius:10px;border:1px solid #eee;font-size:16px}
-    button{padding:10px 16px;border-radius:10px;border:0;background:var(--accent);color:white;font-weight:600;cursor:pointer}
-    .postcard{margin-top:16px;padding:18px;border-radius:12px;background:linear-gradient(135deg,#fff,#fff0f7);text-align:center; display:none}
-    .postcard h2{margin:6px 0;font-size:22px}
-    .postcard p{margin:4px 0;color:#333}
-    footer{text-align:center;margin:18px 0;color:#888;font-size:13px}
-    @media(max-width:720px){.two-col{flex-direction:column}.right{width:100%}}
-    #confetti-canvas{position:fixed;pointer-events:none;top:0;left:0;right:0;bottom:0;z-index:9999}
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chúc mừng sinh nhật Trần Phương Anh</title>
+
+    <!-- Font & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .birthday-card {
+            max-width: 700px;
+            margin: 40px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            animation: fadeIn 1s ease;
+            position: relative;
+            z-index: 100;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Avatar */
+        .avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid #fff;
+            box-shadow: 0 0 15px rgba(255, 50, 150, 0.8);
+            margin: 0 auto 25px;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-size: 35px;
+            font-weight: 800;
+            color: #ff4e88;
+            text-shadow: 2px 2px 2px rgba(255, 50, 100, 0.4);
+        }
+
+        /* Căn đều đoạn văn */
+        p {
+            font-size: 18px;
+            text-align: justify;
+            line-height: 1.7;
+        }
+
+        /* ICON TRANG TRÍ */
+        .decorations {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 20px 0;
+        }
+
+        .decorations i {
+            font-size: 55px;
+            color: #ff7ab3;
+            animation: float 3.5s infinite ease-in-out;
+        }
+
+        .top-decor i { animation-duration: 3s; }
+        .mid-decor i { animation-duration: 3.5s; }
+        .bottom-decor i { animation-duration: 4s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        /* Nút phát nhạc */
+        #music-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 75px;
+            height: 75px;
+            background: #ff4e88;
+            color: white;
+            border-radius: 50%;
+            font-size: 32px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0px 8px 20px rgba(255, 0, 100, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: pulse 1.5s infinite;
+            z-index: 200;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+
+        /* 🌸 HIỆU ỨNG HOA RƠI */
+        .flower {
+            position: fixed;
+            top: -50px;
+            font-size: 25px;
+            color: rgba(255, 182, 193, 0.9);
+            animation: fall linear infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(120vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+    </style>
 </head>
 <body>
-  <canvas id="confetti-canvas"></canvas>
-  <header>
-    <div class="container">
-      <div class="card">
-        <h1>🎉 Chúc mừng 20/10</h1>
-        <p class="lead">Đừng xúc động nhé bà.</p>
-        <div class="two-col">
-          <div class="left">
-            <form id="wishForm">
-              <label for="name">Gõ tên bà vô đây nhé (Tran Phuong Anh):</label>
-              <input id="name" name="name" type="text" placeholder="Tên người nhận">
-              <div style="margin-top:12px">
-                <button id="sendBtn" type="submit">Gửi lời chúc</button>
-                <button id="randomBtn" type="button" style="margin-left:8px;background:#6c6cff">Gợi ý</button>
-              </div>
-            </form>
-            <div class="postcard" id="postcard">
-              <h2 id="wishTitle"></h2>
-              <p>Chúc bà học rỏi, lĩnh học bổng.</p>
-              <p>Và tôi mún tờ 500K bà nhé :3.</p>
-              <div style="margin-top:10px;font-size:12px;color:#666">— Nguyen Chi Khanh siu cute</div>
-            </div>
-          </div>
-          <div class="right">
-            <!-- Thiệp SVG -->
-            <img src="data:image/svg+xml;utf8,<?xml version='1.0' encoding='UTF-8'?><svg xmlns='http://www.w3.org/2000/svg' width='800' height='520' viewBox='0 0 800 520'><defs><linearGradient id='g' x1='0' x2='1' y1='0' y2='1'><stop offset='0' stop-color='%23fff0f7'/><stop offset='1' stop-color='%23ffeef7'/></linearGradient></defs><rect width='800' height='520' rx='24' fill='url(%23g)' stroke='%23ffd6ec' stroke-width='6'/><g transform='translate(40,40)'><text x='0' y='40' font-size='34' font-family='Arial' font-weight='700' fill='%23ff5a9e'>Chúc mừng 20/10</text><text x='0' y='90' font-size='20' fill='%23333'>Gửi đến Tran Phuong Anh</text><g transform='translate(0,140)'><rect x='0' y='0' width='720' height='260' rx='14' fill='%23fff' stroke='%23ffdcee' stroke-width='2'/><text x='40' y='60' font-size='22' fill='%23000'>Nhớ viết tâm thư cảm ơn nhé.</text><text x='40' y='100' font-size='16' fill='%23666'>Chúc bà tất cả hihi.</text></g></g></svg>" style="width:100%;border-radius:10px;display:block">
-          </div>
+
+    <!-- Nút phát nhạc -->
+    <button id="music-btn"><i class="fa-solid fa-music"></i></button>
+
+    <audio id="bg-music">
+        <source src="music.mp3" type="audio/mp3">
+    </audio>
+
+    <div class="birthday-card">
+
+        <!-- Trang trí trên -->
+        <div class="decorations top-decor">
+            <i class="fa-solid fa-heart"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
         </div>
-      </div>
-      <footer>Ngày Phụ nữ Việt Nam — 20/10 </footer>
+
+        <!-- Avatar -->
+        <div class="avatar">
+            <img src="avatar.jpg" alt="avatar">
+        </div>
+
+        <h1>Dear Phanh.</h1>
+
+        <p>Mùa hè năm ấy, cái ngày mà Chí Khanh chậm chững bước vào nghề ca sĩ. Trong lúc mới debut chưa ai biết tới thì đã xuất hiện một người đặc biệt. Người ấy đã đi cùng, cổ vũ suốt thời gian vừa qua trên con đường sự nghiệp của tôi. Không ai khác chính là Tran Phuong Anh. Hôm nay, là ngày mà bà chính thức đặt dấu chân vào tuổi 19, cái độ tuổi lấy chồng. Thay mặt gia đình nội ngoại 2 bên tôi chúc bà gặt hái nhiều thành công trong tuổi mới, luôn vui vẻ, muốn gì được đấy, học giỏi, điểm cao như diều gặp gió, sớm tìm được một nửa còn lại của đời mình. Thôi thì chúc tất cả những gì tốt đẹp nhất đến bà.</p>
+
+        <!-- Trang trí giữa -->
+        <div class="decorations mid-decor">
+            <i class="fa-solid fa-cake-candles"></i>
+            <i class="fa-solid fa-gift"></i>
+            <i class="fa-solid fa-balloon"></i>
+            <i class="fa-solid fa-champagne-glasses"></i>
+        </div>
+
+        <p>Hôm nay là ngày thật đặc biệt, chúc bạn luôn mỉm cười và tỏa sáng ✨</p>
+
+        <!-- Trang trí dưới -->
+        <div class="decorations bottom-decor">
+            <i class="fa-solid fa-heart"></i>
+            <i class="fa-solid fa-bow"></i>
+            <i class="fa-solid fa-star"></i>
+        </div>
+
     </div>
-  </header>
 
-  <script>
-    const samples = ["Tran Phuong Anh"];
-    const randomBtn = document.getElementById('randomBtn');
-    const form = document.getElementById('wishForm');
-    const nameInput = document.getElementById('name');
-    const postcard = document.getElementById('postcard');
-    const wishTitle = document.getElementById('wishTitle');
+    <script>
+        const btn = document.getElementById("music-btn");
+        const music = document.getElementById("bg-music");
 
-    randomBtn.addEventListener('click', () => {
-      const randomName = samples[Math.floor(Math.random() * samples.length)];
-      nameInput.value = randomName;
-    });
+        let playing = false;
 
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const name = nameInput.value.trim() || "Người thân";
-      wishTitle.textContent = `Chúc mừng ngày 20/10, ${name}!`;
-      postcard.style.display = 'block';
-      launchConfetti(80);
-    });
+        btn.addEventListener("click", () => {
+            if (playing) {
+                music.pause();
+                btn.innerHTML = '<i class="fa-solid fa-music"></i>';
+            } else {
+                music.play();
+                btn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+            }
+            playing = !playing;
+        });
 
-    // Confetti effect
-    const canvas = document.getElementById('confetti-canvas');
-    const ctx = canvas.getContext('2d');
-    let W = canvas.width = window.innerWidth;
-    let H = canvas.height = window.innerHeight;
-    window.addEventListener('resize', () => {
-      W = canvas.width = window.innerWidth;
-      H = canvas.height = window.innerHeight;
-    });
+        /* 🌸 HIỆU ỨNG HOA RƠI */
+        function createFlower() {
+            const flower = document.createElement("div");
+            flower.classList.add("flower");
+            flower.innerHTML = "🌸";
 
-    function Confetti(){
-      this.x = Math.random()*W;
-      this.y = -10 - Math.random()*H;
-      this.r = 6+Math.random()*8;
-      this.d = Math.random()*40+10;
-      this.color = `hsl(${Math.floor(Math.random()*360)}, 85%, 60%)`;
-      this.tilt = Math.random()*10-10;
-      this.tiltAngleIncrement = Math.random()*0.07+0.05;
-      this.tiltAngle = 0;
-    }
-    Confetti.prototype.draw = function(){
-      ctx.beginPath();
-      ctx.fillStyle = this.color;
-      ctx.save();
-      ctx.translate(this.x, this.y);
-      ctx.rotate(this.tiltAngle);
-      ctx.fillRect(0, 0, this.r, this.r*0.6);
-      ctx.restore();
-    };
+            flower.style.left = Math.random() * 100 + "vw";
+            flower.style.fontSize = (20 + Math.random() * 20) + "px";
+            flower.style.animationDuration = (4 + Math.random() * 6) + "s";
 
-    let confs = [];
-    function launchConfetti(count){
-      for(let i = 0; i < count; i++) confs.push(new Confetti());
-      animateConfetti();
-    }
+            document.body.appendChild(flower);
 
-    let animId = null;
-    function animateConfetti(){
-      if(animId) cancelAnimationFrame(animId);
-      animId = requestAnimationFrame(stepConfetti);
-    }
-
-    function stepConfetti(){
-      ctx.clearRect(0, 0, W, H);
-      for(let i = confs.length - 1; i >= 0; i--){
-        let c = confs[i];
-        c.tiltAngle += c.tiltAngleIncrement;
-        c.y += Math.cos(c.d) + 3 + c.r/2;
-        c.x += Math.sin(c.d);
-        c.draw();
-        if(c.y > H + 50){
-          confs.splice(i, 1);
+            setTimeout(() => {
+                flower.remove();
+            }, 10000);
         }
-      }
-      if(confs.length > 0){
-        animId = requestAnimationFrame(stepConfetti);
-      }
-    }
-  </script>
+
+        setInterval(createFlower, 300);
+    </script>
+
 </body>
 </html>
